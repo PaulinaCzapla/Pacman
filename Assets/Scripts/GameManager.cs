@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (lives <= 0 && Input.GetKeyDown(KeyCode.Q))
+        if (lives <= 0 && Input.anyKey)
         {
             NewGame();
         }
@@ -50,10 +50,10 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < ghosts.Length; i++)
         {
-            ghosts[i].gameObject.SetActive(true);
+            ghosts[i].ResetState();
         }
 
-        pacman.gameObject.SetActive(true);
+        pacman.ResetState();
     }
 
     private void GameOver()
@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
     public void PacmanEaten()
     {
         this.pacman.gameObject.SetActive(false);
+        Debug.Log("Pacman Eaten");
 
         SetLives(lives - 1);
 
