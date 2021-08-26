@@ -112,6 +112,10 @@ public class GameManager : MonoBehaviour
 
     public void BonusPelletEaten(BonusPellet pellet)
     {        
+        for(int i = 0; i<ghosts.Length; i++)
+        {
+            ghosts[i].scared.Enable(pellet.duration);
+        }
         PelletEaten(pellet);        
         CancelInvoke();
         Invoke(nameof(ResetGhostMultiplayer), pellet.duration);
