@@ -30,9 +30,9 @@ public class GhostAtHomeBehavior : GhostBehavior
     
     private IEnumerator ExitTransition()
     {
-        ghost.movement.SetDirection(Vector2.up, true);
-        ghost.movement.rigidb.isKinematic = true;
-        ghost.movement.enabled = false;
+        this.ghost.movement.SetDirection(Vector2.up, true);
+        this.ghost.movement.rigidb.isKinematic = true;
+        this.ghost.movement.enabled = false;
 
         Vector3 position = this.transform.position;
         float duration = 0.5f;
@@ -42,7 +42,7 @@ public class GhostAtHomeBehavior : GhostBehavior
         {
             Vector3 newPosition = Vector3.Lerp(position, inside.position, elapsed / duration);
             newPosition.z = position.z;
-            ghost.transform.position = newPosition;
+            this.ghost.transform.position = newPosition;
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -53,13 +53,13 @@ public class GhostAtHomeBehavior : GhostBehavior
         {
             Vector3 newPosition = Vector3.Lerp(inside.position, outside.position, elapsed / duration);
             newPosition.z = position.z;
-            ghost.transform.position = newPosition;
+            this.ghost.transform.position = newPosition;
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        ghost.movement.SetDirection(new Vector2(Random.value < 0.5f ? -1.0f : 1.0f, 0.0f), true);
-        ghost.movement.rigidb.isKinematic = false;
-        ghost.movement.enabled = true;
+        this.ghost.movement.SetDirection(new Vector2(Random.value < 0.5f ? -1.0f : 1.0f, 0.0f), true);
+        this.ghost.movement.rigidb.isKinematic = false;
+        this.ghost.movement.enabled = true;
     }
 }
