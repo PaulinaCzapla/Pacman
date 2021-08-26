@@ -6,7 +6,7 @@ public class ChasingGhostBehavior : GhostBehavior
     {
         if (this.gameObject.activeSelf)
         {
-            ghost.scatter.Enable();
+            this.ghost.scatter.Enable();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
