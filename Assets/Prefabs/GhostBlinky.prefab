@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735508548cc01e944940aa96c64d23d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0
 --- !u!114 &-6874558182351935303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24,6 +25,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dc85402dbc6d24f9967b4892ac32e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0
+  body: {fileID: 0}
+  eyes: {fileID: 0}
+  blue: {fileID: 0}
+  white: {fileID: 0}
 --- !u!114 &-2425121014121201254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,6 +42,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abb8adfc691b65418e0886d15464787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0
+  inside: {fileID: 0}
+  outside: {fileID: 0}
 --- !u!114 &788849242196555814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e887eed70bc00449ad1fe886f11f6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0
 --- !u!1001 &5385645667768240904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,7 +123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6851009988419687210, guid: b39a30890bd1b05489d36ed3c847506c, type: 3}
       propertyPath: m_Name
-      value: GhostRed
+      value: GhostBlinky
       objectReference: {fileID: 0}
     - target: {fileID: 6851009988419687213, guid: b39a30890bd1b05489d36ed3c847506c, type: 3}
       propertyPath: initialDirection.x
