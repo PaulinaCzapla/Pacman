@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,15 +17,27 @@ public class GameManager : MonoBehaviour
 
     public int lives { get; private set; }
 
+    public UserInterface ui;
+
+    public Canvas canvasGameOver;
+
+    public Text scoreGameOver;
+
+    public Text gameOverText;
+
+    private FadeIn fadeIn;
+
     private void Start()
     {
+        fadeIn = canvasGameOver.gameObject.GetComponent<FadeIn>();
+        canvasGameOver.gameObject.SetActive(false);
         NewGame();
     }
-
     private void Update()
     {
-        if (lives <= 0 && Input.anyKey)
+        if (canvasGameOver.gameObject.activeSelf && Input.anyKey)
         {
+            canvasGameOver.gameObject.SetActive(false);
             NewGame();
         }
     }
@@ -32,6 +45,7 @@ public class GameManager : MonoBehaviour
     {
         SetScore(0);
         SetLives(3);
+        ui.RenewAllLives();
         NewRound();
     }
 
@@ -64,10 +78,14 @@ public class GameManager : MonoBehaviour
         }
 
         pacman.gameObject.SetActive(false);
+
+        canvasGameOver.gameObject.SetActive(true);
+        fadeIn.Restart();
     }
     private void SetScore(int score)
     {
         this.score = score;
+        ui.DisplayScore(this.score);
     }
 
     private void SetLives(int lives)
@@ -84,9 +102,9 @@ public class GameManager : MonoBehaviour
     public void PacmanEaten()
     {
         this.pacman.gameObject.SetActive(false);
-        Debug.Log("Pacman Eaten");
 
         SetLives(lives - 1);
+        ui.LiveLost();
 
         if (lives > 0)
         {
@@ -94,6 +112,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            gameOverText.text = "GAME OVER";
+            scoreGameOver.text = score.ToString();
             GameOver();
         }
     }
@@ -106,17 +126,20 @@ public class GameManager : MonoBehaviour
         if (!HasReminingPellets())
         {
             pacman.gameObject.SetActive(false);
-            Invoke(nameof(NewRound), 3.0f);
+            gameOverText.text = "YOU WON";
+            scoreGameOver.text = score.ToString();
+            GameOver();
+            // Invoke(nameof(NewGam), 3.0f);
         }
     }
 
     public void BonusPelletEaten(BonusPellet pellet)
-    {        
-        for(int i = 0; i<ghosts.Length; i++)
+    {
+        for (int i = 0; i < ghosts.Length; i++)
         {
             ghosts[i].scared.Enable(pellet.duration);
         }
-        PelletEaten(pellet);        
+        PelletEaten(pellet);
         CancelInvoke();
         Invoke(nameof(ResetGhostMultiplayer), pellet.duration);
     }
