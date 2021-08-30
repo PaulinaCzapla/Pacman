@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public Transform pellets;
 
+    public FruitsManager fruitsManager;
+
     public int ghostMultiplayer = 1;
 
     public int score { get; private set; }
@@ -31,21 +33,28 @@ public class GameManager : MonoBehaviour
     {
         fadeIn = canvasGameOver.gameObject.GetComponent<FadeIn>();
         canvasGameOver.gameObject.SetActive(false);
+
         NewGame();
     }
-    private void Update()
+
+    private IEnumerator StartNewGame()
     {
-        if (canvasGameOver.gameObject.activeSelf && Input.anyKey)
+        yield return new WaitForSeconds(3f);
+
+        while (!canvasGameOver.gameObject.activeSelf || !Input.anyKey)
         {
-            canvasGameOver.gameObject.SetActive(false);
-            NewGame();
+            yield return null;
         }
+        canvasGameOver.gameObject.SetActive(false);
+        NewGame();
     }
     private void NewGame()
     {
         SetScore(0);
         SetLives(3);
         ui.RenewAllLives();
+        fruitsManager.gameObject.SetActive(true);
+        StopAllCoroutines();
         NewRound();
     }
 
@@ -55,13 +64,11 @@ public class GameManager : MonoBehaviour
         {
             pellet.gameObject.SetActive(true);
         }
-
         ResetState();
     }
 
     private void ResetState()
     {
-
         for (int i = 0; i < ghosts.Length; i++)
         {
             ghosts[i].ResetState();
@@ -77,10 +84,13 @@ public class GameManager : MonoBehaviour
             ghosts[i].gameObject.SetActive(false);
         }
 
+        fruitsManager.gameObject.SetActive(false);
         pacman.gameObject.SetActive(false);
 
         canvasGameOver.gameObject.SetActive(true);
         fadeIn.Restart();
+
+        StartCoroutine(StartNewGame());
     }
     private void SetScore(int score)
     {
@@ -118,6 +128,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void FruitEaten(Fruit fruit)
+    {
+        fruit.gameObject.SetActive(false);
+        SetScore(score + fruit.points);
+    }
     public void PelletEaten(Pellet pellet)
     {
         pellet.gameObject.SetActive(false);
@@ -129,7 +144,6 @@ public class GameManager : MonoBehaviour
             gameOverText.text = "YOU WON";
             scoreGameOver.text = score.ToString();
             GameOver();
-            // Invoke(nameof(NewGam), 3.0f);
         }
     }
 
