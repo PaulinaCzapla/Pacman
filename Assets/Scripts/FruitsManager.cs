@@ -27,10 +27,9 @@ public class FruitsManager : MonoBehaviour
 
     private void OnEnable()
     {
-        DestroyCurrentFruit();
-
         StopAllCoroutines();
-
+        DestroyCurrentFruit();
+        
         if (this.gameObject.activeSelf)
         {
             StartCoroutine(GenerateFruit());

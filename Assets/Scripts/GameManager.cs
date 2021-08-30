@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     {
         fadeIn = canvasGameOver.gameObject.GetComponent<FadeIn>();
         canvasGameOver.gameObject.SetActive(false);
-
         NewGame();
     }
 
@@ -73,7 +72,6 @@ public class GameManager : MonoBehaviour
         {
             ghosts[i].ResetState();
         }
-
         pacman.ResetState();
     }
 
@@ -86,7 +84,6 @@ public class GameManager : MonoBehaviour
 
         fruitsManager.gameObject.SetActive(false);
         pacman.gameObject.SetActive(false);
-
         canvasGameOver.gameObject.SetActive(true);
         fadeIn.Restart();
 
@@ -167,7 +164,6 @@ public class GameManager : MonoBehaviour
                 return true;
             }
         }
-
         return false;
     }
 

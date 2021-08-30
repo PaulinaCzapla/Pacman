@@ -21,7 +21,7 @@ public class AnimatedSprite : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(Advance), animationTime, animationTime);
+        InvokeRepeating(nameof(Advance), animationTime, animationTime); // to change to coroutine
     }
 
     private void Advance()

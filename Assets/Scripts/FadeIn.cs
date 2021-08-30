@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+// TODO: REFACTOR
 public class FadeIn : MonoBehaviour
 {
     public CanvasGroup canvasGroup { get; private set; }
@@ -19,7 +19,7 @@ public class FadeIn : MonoBehaviour
 
     }
 
-    private void Update() //to refactor
+    private void Update() 
     {
         if (this.enabled == false)
         {
@@ -36,7 +36,6 @@ public class FadeIn : MonoBehaviour
             alpha = animationFrame / 100f;
             canvasGroup.alpha = alpha;
         }
-        //Debug.Log("3");
     }
 
     public void Restart()

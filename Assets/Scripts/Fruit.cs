@@ -8,14 +8,6 @@ public class Fruit : MonoBehaviour
 
     public float weight; // in %
 
-    private void Start()
-    {
-        
-    }
-    public void GenerateFruit()
-    {
-
-    }
     private void Eat()
     {
         FindObjectOfType<GameManager>().FruitEaten(this);
