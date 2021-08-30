@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: points
       value: 3000
       objectReference: {fileID: 0}
+    - target: {fileID: 85303972786555673, guid: fa5d036f43b884f45b0eaa6f73419785, type: 3}
+      propertyPath: weight
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 361033750457770459, guid: fa5d036f43b884f45b0eaa6f73419785, type: 3}
       propertyPath: m_Size.y
       value: 1.625
