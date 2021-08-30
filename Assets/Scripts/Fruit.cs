@@ -6,7 +6,12 @@ public class Fruit : MonoBehaviour
 {
     public int points;
 
-    public float wage; // in %
+    public float weight; // in %
+
+    private void Start()
+    {
+        
+    }
     public void GenerateFruit()
     {
 
