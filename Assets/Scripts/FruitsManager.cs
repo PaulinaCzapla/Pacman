@@ -8,6 +8,15 @@ public class FruitsManager : MonoBehaviour
 
     private Vector3[] positions = new Vector3[4];
 
+    private Object currentFruit;
+
+    public void DestroyCurrentFruit()
+    {
+        if (currentFruit)
+        {
+            Destroy(currentFruit);
+        }
+    }
     private void Start()
     {
         positions[0] = new Vector3(-4.5f, -1.5f, -0.5f);
@@ -18,6 +27,8 @@ public class FruitsManager : MonoBehaviour
 
     private void OnEnable()
     {
+        DestroyCurrentFruit();
+
         StopAllCoroutines();
 
         if (this.gameObject.activeSelf)
@@ -25,6 +36,7 @@ public class FruitsManager : MonoBehaviour
             StartCoroutine(GenerateFruit());
         }
     }
+
     private int WeightFunction(float x)
     {
         float sum = 0.0f;
@@ -50,23 +62,23 @@ public class FruitsManager : MonoBehaviour
         {
             yield return new WaitForSeconds(15f);
 
-                int index = WeightFunction(Random.Range(0f, 1f));
+            int index = WeightFunction(Random.Range(0f, 1f));
 
-                if (index < fruits.Length)
+            if (index < fruits.Length)
+            {
+                fruits[index].SetActive(true);
+
+                Vector3 position = positions[Random.Range(0, positions.Length)];
+                currentFruit = Instantiate(fruits[index], position, fruits[index].transform.rotation);
+
+                yield return new WaitForSeconds(8f);
+
+                if (fruits[index].activeSelf)
                 {
-                    fruits[index].SetActive(true);
-
-                    Vector3 position = positions[Random.Range(0, positions.Length)];
-                    Object obj = Instantiate(fruits[index], position, fruits[index].transform.rotation);
-
-                    yield return new WaitForSeconds(8f);
-
-                    if (fruits[index].activeSelf)
-                    {
-                        fruits[index].SetActive(false);
-                        Destroy(obj);
-                    }
+                    fruits[index].SetActive(false);
+                    Destroy(currentFruit);
                 }
+            }
         }
 
     }
