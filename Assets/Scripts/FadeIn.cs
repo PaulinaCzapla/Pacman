@@ -19,19 +19,16 @@ public class FadeIn : MonoBehaviour
 
     }
 
-    private void Update()
+    private void Update() //to refactor
     {
         if (this.enabled == false)
         {
             animationFrame = 0;
-            Debug.Log("1");
             return;
         }
         else if (!canvasGroup.isActiveAndEnabled || animationFrame >= 100)
         {
-            Debug.Log("2");
             return;
-
         }
         else if (animationFrame < 100)
         {
